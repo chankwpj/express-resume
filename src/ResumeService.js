@@ -4,27 +4,23 @@ import mongodb from 'mongodb';
 export default class ResumeService {
 
     constructor() {
-        this.connectionString = '';
+        this.connectionString = 'mongodb://api-dev:f8H60TnQC8K4Jkv7Z5N9lnskA1Wh5PmmjVuYOB5cojRNQy8EJa83eN8ARRv4WMnMFxZD6pwbqEAYRZdmFZDDYg==@api-dev.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@api-dev@';
         this.databaseId = 'Resumes';
         this.collectionId = 'Resumes';
         this.mongoClient = mongodb.MongoClient;
+        const self = this;
+        const init = async () => {self.collection = await self.connection()};
+        init();
     }
 
     get(version) {
         const self = this;
         return new Promise((resolve, reject) => {
-            self.connection()
-                .then((collection) => {
-                    collection.findOne({ id: version }, {}, function (err, doc) {
-                        err ? reject(err) : resolve(doc);
-                    });
-                })
-                .catch((error) => {
-                    reject(error);
-                });
+            self.collection.findOne({ id: version }, {}, function (err, doc) {
+                err ? reject(err) : resolve(doc);
+            });
         });
     }
-
 
     connection() {
         const self = this;
