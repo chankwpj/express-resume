@@ -4,7 +4,7 @@ import mongodb from 'mongodb';
 export default class ResumeService {
 
     constructor() {
-        this.connectionString = 'mongodb://api-dev:f8H60TnQC8K4Jkv7Z5N9lnskA1Wh5PmmjVuYOB5cojRNQy8EJa83eN8ARRv4WMnMFxZD6pwbqEAYRZdmFZDDYg==@api-dev.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@api-dev@';
+        this.connectionString = '';
         this.databaseId = 'Resumes';
         this.collectionId = 'Resumes';
         this.mongoClient = mongodb.MongoClient;
